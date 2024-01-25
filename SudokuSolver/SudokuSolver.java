@@ -65,11 +65,8 @@ public class SudokuSolver {
 		if (row == 9) // the entire grid has been filled up (base case)
 			return true;
 			
-		if (puzzle[row][col] != 0){
-			if (solvePuzzle(row, col + 1)) 
-				return true;
-			return false;
-		}
+		if (puzzle[row][col] != 0)
+			return solvePuzzle(row, col + 1); 
 
 		int[] randNums = generateNums();
 		for (int i = 0; i < randNums.length; i++){

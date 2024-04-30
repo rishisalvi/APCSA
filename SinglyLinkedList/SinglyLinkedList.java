@@ -1,7 +1,11 @@
 import java.util.NoSuchElementException;
 
 /**
- *	SinglyLinkedList - (description)
+ *	SinglyLinkedList - creates a linear row of data that holds values in 
+ * 	a row of connected nodes
+ * 	each node has a pointer to the node that comes before and after it, making
+ * 	it easy to insert and alter data within the list
+ * 	the list's size can grow at the coder's will
  *
  *	@author	Rishi Salvi
  *	@since	29 April 2024
@@ -18,7 +22,6 @@ public class SinglyLinkedList<E extends Comparable<E>>
 	public SinglyLinkedList(SinglyLinkedList<E> oldList) {
 		this.head = oldList.head; 
 		this.tail = oldList.tail; 
-		
 	}
 	
 	/**	Clears the list of elements */

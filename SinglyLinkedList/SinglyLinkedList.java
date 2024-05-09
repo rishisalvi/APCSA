@@ -20,8 +20,23 @@ public class SinglyLinkedList<E extends Comparable<E>>
 	
 	/** Copy constructor */
 	public SinglyLinkedList(SinglyLinkedList<E> oldList) {
-		this.head = oldList.head; 
-		this.tail = oldList.tail; 
+		ListNode oldCurr = oldList.head; 
+		ListNode curr = null; 
+		ListNode first = null; 
+		while (oldCurr != null){
+			ListNode temp = new ListNode(oldCurr.getValue()); 
+			if (first == null){
+				first = temp; 
+				curr = first; 
+			}
+			else{
+				curr.setNext(temp); 
+				curr = curr.getNext(); 
+			}
+			oldCurr = oldCurr.getNext(); 
+		}
+		this.head = first; 
+		this.tail = curr; 
 	}
 	
 	/**	Clears the list of elements */

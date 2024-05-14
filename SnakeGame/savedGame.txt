@@ -1,0 +1,14 @@
+Score 5
+Target
+19 16
+Snake 10
+ListNode@38af3868
+ListNode@77459877
+ListNode@5b2133b1
+ListNode@72ea2f77
+ListNode@33c7353a
+ListNode@681a9515
+ListNode@3af49f1c
+ListNode@19469ea2
+ListNode@13221655
+ListNode@2f2c9b19

@@ -132,71 +132,35 @@ public class BinaryTree<E extends Comparable<E>> {
 	public void remove(E value) {
 		root = remove(root, value);
 	}
-	/**
-	 *	Remove value from Binary Tree
-	 *	@param node			the root of the subtree
-	 *	@param value		the value to remove from the subtree
-	 *	@return				TreeNode that connects to parent
+
+	/** Remove value from Binary Tree
+	 * @param node the root of the subtree
+	 * @param value the value to remove from the subtree
+	 * @return TreeNode that connects to parent
 	 */
-	public TreeNode<E> remove(TreeNode<E> node, E value) {
-		if (node.getValue().compareTo(value) > 0){
-			if (node.getLeft().getValue().compareTo(value) != 0)
-				return remove(node.getLeft(), value); 
-			else
-				return handleRemoving(node.getLeft(), node); 
-		}
-		else if (node.getValue().compareTo(value) < 0){
-			if (node.getRight().getValue().compareTo(value) != 0)
-				return remove(node.getRight(), value); 
-			else
-				return handleRemoving(node.getRight(), node); 
-		}
-		return node; 
-	}
-
-	public TreeNode<E> handleRemoving(TreeNode<E> node, TreeNode<E> parent){
-		if (node.getLeft() == null && node.getRight() == null){
-			if (parent.getLeft().equals(node))
-				parent.setLeft(null);
-			else
-				parent.setRight(null); 
-		}
-		else if (node.getRight() == null){
-			if (parent.getLeft().equals(node))
-				parent.setLeft(node.getLeft());
-			else
-				parent.setRight(node.getLeft());
-		}
+	private TreeNode<E> remove(TreeNode<E> node, E value) {
+		if (node.getValue().compareTo(value) > 0)
+			node.setLeft(remove(node.getLeft(), value));
+		else if (node.getValue().compareTo(value) < 0)
+			node.setRight(remove(node.getRight(), value));
 		else{
-			handleRight(node, parent, node.getLeft()); 
-		}
-		return node; 
-	}
+			if (node.getRight() == null)
+				return node.getLeft();
 
-	public TreeNode<E> handleRight(TreeNode<E> node, TreeNode<E> parent, TreeNode<E> left){
-		TreeNode<E> right = node.getRight(); 
-		System.out.println("right: " + right.getValue());
-		TreeNode<E> curr = node.getRight(); 
-		TreeNode<E> currParent = node; 
-		while (curr.getLeft() != null){
-			currParent = curr; 
-			curr = curr.getLeft(); 
+			TreeNode<E> parent = node;
+			TreeNode<E> curr = node.getRight();
+			while (curr.getLeft() != null){
+				parent = curr;
+				curr = curr.getLeft();
+			}
+			if (parent != node){
+				parent.setLeft(curr.getRight());
+				curr.setRight(node.getRight());
+			}
+			curr.setLeft(node.getLeft());
+			return curr;
 		}
-		System.out.println("curr: " + curr.getValue());
-		System.out.println("currp: " + currParent.getValue());
-		currParent.setLeft(null); 
-		if (parent.getValue().compareTo(node.getValue()) > 0)
-			parent.setLeft(curr);
-		else
-			parent.setRight(curr); 
-		curr.setLeft(left);
-		if (!currParent.equals(node)){
-			TreeNode<E> curr2 = curr; 
-			while (curr2.getRight() != null)
-				curr2 = curr2.getRight(); 
-			curr2.setRight(right); 
-		}
-		return curr;
+		return node;
 	}
 	
 
